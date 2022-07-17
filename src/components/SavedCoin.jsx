@@ -15,6 +15,7 @@ const SavedCoin = () => {
     });
   }, [user?.email]);
 
+
   const coinPath = doc(db, 'users', `${user?.email}`);
   const deleteCoin = async (passedID) => {
     try {
@@ -25,7 +26,7 @@ const SavedCoin = () => {
     } catch (e) {
       console.log(e.message);
     }
-  }
+  };
 
   return (
     <div>
@@ -42,13 +43,13 @@ const SavedCoin = () => {
             </tr>
           </thead>
           <tbody>
-            {coins?.map((coin) => {
+            {coins?.map((coin) => (
               <tr key={coin.id} className="h-[60px] overflow-hidden">
                 <td>{coin?.rank}</td>
                 <td>
                   <Link to={`/coin/${coin.id}`}>
                     <div className="flex items-center">
-                      <img src={coin?.image} alt="/" className="w-8 mr-4" />
+                      <img src={coin?.image} className="w-8 mr-4 " alt="/" />
                       <div>
                         <p className="hidden sm:table-cell">{coin?.name}</p>
                         <p className="text-gray-500 text-left text-sm">{coin?.symbol.toUpperCase()}</p>
@@ -60,12 +61,13 @@ const SavedCoin = () => {
                   <AiOutlineClose onClick={() => deleteCoin(coin.id)} className="cursor-pointer" />
                 </td>
               </tr>
-            })}
+            ))}
           </tbody>
         </table>
       )}
     </div>
-  )
+  );
 }
+
 
 export default SavedCoin;
